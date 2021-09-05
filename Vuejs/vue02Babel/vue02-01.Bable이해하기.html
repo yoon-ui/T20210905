@@ -36,7 +36,14 @@
     </div>
 
 </body>
-
+<script  type="text/javascript">
+    var name ="abe";
+    var age = 10;
+    var getMessage = ()=>{
+        return "Hello, ES5";
+    }
+    document.getElementById("output_es5").innerText ="Hello, Es5";
+</script>
 </html>
 
 <!-- ES5 사용하기 -->
@@ -44,3 +51,17 @@
 
 
 <!-- ES2016 사용하기 -->
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.js">
+    /* 자바스크립트로 컴파일러. ES6-->ES5, JSX-->ES5 */
+</script>
+
+<script type="text/babel">
+    const name ="abc;" //읽기전용
+    let age = 10; //읽기 쓰기
+
+    const getMessage = ()=>{
+        return "Hello, ES2016";
+    }
+    document.getElementById("output_es6").innerText =getMessage();
+</script>

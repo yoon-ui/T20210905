@@ -76,5 +76,73 @@
         </ol>
     </div>
 </body>
+<script>
+    //1.Object Arrary 생성
+        let  objarray = [
+            { text: 'One', value: 'A' },
+            { text: 'Two', value: 'B' },
+            { text: 'Three', value: 'C' }
+        ];
+    console.log(objarray)
 
+    //2.objarray 에 { text: 'Four', value: 'D' } 를 추가하시오.
+    //objarray.push({text: 'Four', value: 'D' })
+    objarray[objarray.length]={text: 'Four', value: 'D'}
+    console.log(objarray);
+
+    //3.objarray 에서 { text: 'Two', value: 'B' } 를 { text: '2', value: '2' } 로 바꾸시오.
+    //objarray[1]={text: '2', value: '2'}
+    const findIndex = objarray.findIndex((item, index, array)=>{
+        return item.text === 'Two'
+    })
+    console.log(findIndex); //1
+    objarray[findIndex]={text: '2', value: '2'}
+    console.log(objarray);
+
+    //4.objarray 에서 filter 메서드를 사용하여 text의 값이 'One' 인 객체들을 찾으시오
+    //내가 한거
+    //const ob = objarray.filter((value, index, arra)=>{
+    //         return  objarray.text == 'One'
+    // });
+    // console.log(ob);
+
+    //정답
+    const arrFilter = objarray.filter((item, index, array)=>{
+        return item.text === 'One';
+    })
+    console.log(arrFilter)
+
+    debugger;
+
+    //5.objarray 에서 { text: 'Three', value: 'C' } 를 삭제하시오.
+   //objarray.splice(2,1);
+   const deleteIndex = objarray.findIndex((item, index, array)=>{
+        return item.text === 'Three' &&  item.value  === 'C'
+    })
+    console.log("deleteIndex", deleteIndex); //2
+    objarray.splice(deleteIndex,1);
+
+    //6.objarray 에서 map 메서드를 사용하여 no 프로퍼티 추가하시오
+    //index array 픽스. 밸류/아이템은 상황에 따라 바꾸기
+    //아래 재할당
+    objarray = objarray.map((item,index,array)=>{
+        //item ==={text:???, value:???};
+        item.no = index; //item ==={text:???, value:???, no:???};
+        return item;
+    })
+    console.log(objarray);
+
+    debugger;
+
+    //7.objarray 에서 reduce 메서드를 사용하여 각 요소의 value 프로퍼티 를 합쳐서 하나의 문자열로 만드시오
+    const item = objarray
+        .map((item)=>{
+            return{...item};
+        })//얕은 복제로 인해 문제가 생김(원본이 변경되는 이유) 해결법 : 위 객체를 복제한다.
+        .reduce((prevItem, curtItem, array)=>{
+            prevItem.value =prevItem.value + curtItem.value;
+            return prevItem
+        });
+    console.log(item.value);
+</script>
 </html>
