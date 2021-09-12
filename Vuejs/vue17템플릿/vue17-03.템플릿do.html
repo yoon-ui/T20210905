@@ -28,7 +28,7 @@
            바인딩 되게 하시오.
            인스턴스에 template 속성을 설정하는 경우의 확인 사항.
            "사랑해~~~"는 남아있는가? 사라지는가?
-           ==> 같이
+           ==> a
 
         3. app3. x-template 을 사용하여 템플릿을 지정하는 방법
             < script type="text/x-template" id="template3">
@@ -57,8 +57,11 @@
             <!-- script 를 사용하는 방식 -->
             사랑해~~~
         </div>
+        <script type="text/x-template" id="template3">
+        <i>x-template을 이용한 데이터 출력. {{message3}} </i>
+        </script>
 
-        
+
 
     </div>
 </body>
@@ -67,5 +70,39 @@
 
 <!-- vue 플러그인 임포트   -->
 
+<!-- vue 플러그인 임포트   -->
+<script src="https://unpkg.com/vue@2.6.14/dist/vue.js">/* vue 플러그인 임포트 */</script>
+<script>
+    new Vue({
+        /* edtmc^2w */
+        el: "#app1",
+        data: {
+            /* 인스턴스 안에서 사용되는 변수 등록, 공유 변수 */
+            message :'<i>콧수염 괄호를 이용한 데이터 출력</i>'
+        },
+    });
+
+new Vue({
+    /* edtmc^2w */
+    el: "#app2",
+    data: {
+        /* 인스턴스 안에서 사용되는 변수 등록, 공유 변수 */
+        message2 : '<i>콧수염 괄호를 이용한 데이터 출력</i>'
+    },
+    template: `<i>template 속성을 이용한 데이터 출력. {{message2}} </i>`,
+});
+
+new Vue({
+    /* edtmc^2w */
+    el: "#app3",
+    data: {
+        /* 인스턴스 안에서 사용되는 변수 등록, 공유 변수 */
+        message3:'<i>콧수염 괄호를 이용한 데이터 출력</i>',
+    },
+    template: `#template3`,
+
+});
+
+</script>
 
 

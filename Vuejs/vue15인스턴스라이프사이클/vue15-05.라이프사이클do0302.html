@@ -36,16 +36,57 @@
     <div id="app">
         {{ message }}
         <!-- 버튼 기능 추가-->
-
+        <button onClick="btnClick()">JS 버튼</button>
+        <button v-on:click="btnClick">Vue 버튼</button>
     </div>
 
-    
+
 
 </body>
 
 </html>
 
 <!-- vue 플러그인 임포트   -->
+<script src="https://unpkg.com/vue@2.6.14/dist/vue.js">/* vue 플러그인 임포트 */</script><script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"> /* jQuery 플러그인 임포트 */</script>
+<script>
+    new Vue({
+        /* edtmc^2w */
+        el: "#app",
+        data: {
+            /* 인스턴스 안에서 사용되는 변수 등록, 공유 변수 */
+            message : "Hello vue",
+        },
+        template: `
+            <div>
+             aaa
+            </div>
+            `,
+        methods: {
+            /* 이벤트 핸들러 등록 + 일반 함수 */
+            btnClick(){
+                //this.$data.message ="홍길동"
+                this.$set(this.$data, 'message', '홍길동' + new Date().toLocaleTimeString() )
+            }
+        },
+        computed: {
 
 
+        },
+        watch: {
 
+        },
+        created: function(){
+            console.log("created");
+        },
+        mounted: function() {
+            console.log("mounted");
+            //data.message 변경
+            //this.$data.message ="data.message 변경;"
+            //this.$set(this.$data, message ,"data.message 변경" )
+        },
+        updated: function() {
+            console.log("updated");
+        },
+    });
+
+</script>
