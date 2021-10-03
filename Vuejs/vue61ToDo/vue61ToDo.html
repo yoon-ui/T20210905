@@ -787,7 +787,7 @@
                          * axios 호출 성공 하면 mutations.commit("addTodo", res.data); 호출
                          */
                     },
-                    doneToggle(mutations, param) {
+                    doneToggle(mutations, id) {
                         /**
                          * Update(개별).
                          * axios 로  http://localhost:5050/todo/donetoggle 호출
@@ -798,7 +798,7 @@
                          * axios 호출 성공 하면 mutations.commit("doneToggle", res.data); 호출
                          */
                     },
-                    removeTodo(mutations, param) {
+                    removeTodo(mutations, id) {
                         /**
                          * Delete(개별)
                          * axios 로  http://localhost:5050/todo/remove
