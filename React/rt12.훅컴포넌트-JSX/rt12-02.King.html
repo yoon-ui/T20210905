@@ -27,18 +27,18 @@
             부모 컴포넌트 : KingContainer
             자식 컴포넌트 : King
 
-        KingContainer 의 render() 에서 사용할 JSX
+        KingContainer 에서 사용할 JSX
         <div>
-            <King name="세종대왕">
+            <King name="세종대왕">
                 <span>0</span>
             </King>
-            <King name="이순신">
+            <King name="이순신">
                 <span>1</span>
             </King>
-            <King name="광개토">
+            <King name="광개토">
                 <span>2</span>
             </King>
-            <King name="왕건">
+            <King name="왕건">
                 <span>3</span>
             </King>
         </div>
@@ -55,4 +55,54 @@
 
 </html>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.js">
+    /* 자바스크립트로 컴파일러. ES6-->ES5, JSX-->ES5 */
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/16.12.0/umd/react.development.js">
+    /* import React, { Component, PureComponent } from 'react' */
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prop-types/15.7.2/prop-types.js">
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/16.11.0/umd/react-dom.development.js">
+    /* import ReactDOM from 'react-dom' */
+</script>
+<script type="text/babel">
 
+    const { useState, useEffect, useRef, useCallback, useMemo, Fragment } = React;
+
+    function KingContainer(props) {
+        // 컴포넌트의 상태값 설정
+        const [변수명, set변수명] = useState([
+            { name: "세종대왕", idx: 0, },
+            { name: "이순신", idx: 1, },
+            { name: "광개토", idx: 2, },
+            { name: "왕건", idx: 3, },
+        ]); // 상태값이 참조타입인 경우
+
+        // JSX로 화면 만들기
+        const kings  = 변수명.map( (item)=> {
+            return (
+            <King name={item.name}>
+                <span>{item.idx}</span>
+            </King>
+            )
+        })
+        return (
+        <div>
+            {kings}
+        </div>
+        )
+    }
+
+    function King(props) {
+        // JSX로 화면 만들기
+        return (
+            <div>
+                {props.name}
+                {props.children}
+            </div>
+        )
+    }
+
+    ReactDOM.render( <KingContainer />, document.getElementById("app"));
+</script>

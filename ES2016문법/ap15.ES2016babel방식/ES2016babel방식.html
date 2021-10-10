@@ -13,19 +13,19 @@
     <xmp>
 
     $ node -v
-    v12.18.1
+    v16.4.0
 
-    $ mkdir es2015test
+    $ mkdir es2016test
 
     $ pwd
     /d/workspace/Lecture/JavaScript/JavaScriptSource/st51.React/rt03.ES6문법
 
-    $ cd es2015test
+    $ cd es2016test
 
     $ pwd
-    /d/workspace/Lecture/JavaScript/JavaScriptSource/st51.React/rt03.ES6문법/es2015test
+    /d/workspace/Lecture/JavaScript/JavaScriptSource/st51.React/rt03.ES6문법/es2016test
 
-    $ npm init
+    $ npm init   # package.json 파일 생성.
     This utility will walk you through creating a package.json file.
     It only covers the most common items, and tries to guess sensible defaults.
 
@@ -36,7 +36,7 @@
     save it as a dependency in the package.json file.
 
     Press ^C at any time to quit.
-    package name: (es2015test)
+    package name: (es2016test)
     version: (1.0.0)
     description:
     entry point: (index.js)
@@ -45,10 +45,10 @@
     keywords:
     author:
     license: (ISC)
-    About to write to D:\workspace\Lecture\JavaScript\JavaScriptSource\st51.React\rt03.ES6문법\es2015test\package.json:
+    About to write to D:\workspace\Lecture\JavaScript\JavaScriptSource\st51.React\rt03.ES6문법\es2016test\package.json:
 
     {
-        "name": "es2015test",
+        "name": "es2016test",
         "version": "1.0.0",
         "description": "",
         "main": "index.js",
@@ -67,7 +67,7 @@
 
     $ cat package.json
     {
-        "name": "es2015test",
+        "name": "es2016test",
         "version": "1.0.0",
         "description": "",
         "main": "index.js",
@@ -96,7 +96,7 @@
 
     $ cat package.json
       {
-            "name": "es2015test",
+            "name": "es2016test",
             "version": "1.0.0",
             "description": "",
             "main": "index.js",
@@ -123,18 +123,18 @@
         "presets": ["env", "stage-3"]
     }
 
-    $ mkdir src    # es2015test 폴더에 src 폴더 생성
+    $ mkdir src    # es2016test 폴더에 src 폴더 생성
 
     $ ls -a
     .  ..  .babelrc  node_modules  package.json  package-lock.json  src
 
-    $ es2015test/src 에 07-02.js 파일 생성 후 코드 추가
+    $ es2016test/src 에 07-02.js 파일 생성 후 코드 추가
     let name = "world";
     console.log( `Hello ${name}` );
 
 
     $ 폴더 구조 및 파일 확인
-    \ES2015TEST
+    \es2016test
     |   .babelrc
     |   package-lock.json
     |   package.json
@@ -169,7 +169,7 @@
 
     $ cat packages.json
       {
-        "name": "es2015test",
+        "name": "es2016test",
         "version": "1.0.0",
         "description": "",
         "main": "index.js",
