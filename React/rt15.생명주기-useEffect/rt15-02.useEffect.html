@@ -29,22 +29,30 @@
         </div>
     </pre>
     <xmp>
-
-        1. ExampleContainer, Example 컴포넌를 만든다.
+        1. ExampleContainer, Example 컴포넌트를 만든다.
         2. ExampleContainer 컴포넌트의 상태값 만들기
             const [state, setState] = useState({ id: 0, name: '', count: 10, }); // 상태값이 참조타입 경우
-        3. Example 컴포넌트의 상태값 만들기
+            const callbackState = useCallback( (param)=>{
+                // 상태 변경 처리
+            }, [state]);
+        3.ExampleContainer 컴포넌트의 JSX
+            <div>
+                <Example state={state} callbackState={callbackState} >
+                </Example>
+            </div>
+        4. Example 컴포넌트의 상태값 만들기
             const [age, setAge] = useState(42);
             const [fruit, setFruit] = useState('banana');
             const [todos, setTodos] = useState([{ text: 'Learn Hooks' }]);
-        4.Example 컴포넌트의 JSX
+        5.Example 컴포넌트의 JSX
             <div>
-                <p>You clicked {count} times</p>
+                <p>You clicked {props.count} times</p>
                 <button onClick={(event) => alert("상태값을 바꾸는 코드를 작성하시오.") }>
                 Click me
                 </button>
             </div>
-        4. age, fruit, todos 상태값이 출력되게 하시오.
+        6. age, fruit, todos 상태값이 출력되게 하시오.
+
     </xmp>
     <hr>
 
@@ -54,10 +62,85 @@
 
 </html>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.js">
+    /* 자바스크립트로 컴파일러. ES6-->ES5, JSX-->ES5 */
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/16.12.0/umd/react.development.js">
+    /* import React, { Component, PureComponent } from 'react' */
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prop-types/15.7.2/prop-types.js">
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/16.11.0/umd/react-dom.development.js">
+    /* import ReactDOM from 'react-dom' */
+</script>
+<script type="text/babel">
+    const { useState, useEffect, useRef, useCallback, useMemo, Fragment } = React;
 
+    function ExampleContainer(props) {
 
+        // refIsMounted는 생명주기의 마운트와 업데이트를 구분하기 위한 ref
+        const refIsMounted = useRef(false);
+        useEffect( () => {
+            if (refIsMounted.current){
+                // 업데이트 될 때마다 실행됨. 여러번. state 가 변경될 때마다
+                console.log('componentDidUpdate');
+            }
+            else {
+                // 마운트 완료 후에 실행됨. 한번만. focus 줄때
+                console.log('componentDidMount');
+                refIsMounted.current = true;
+            }
+        });
 
+        // 컴포넌트의 상태값 설정
+        const [state, setState] = useState({ id: 0, name: '', count: 10, }); // 상태값이 참조타입 경우
 
+        // callback 메서드 작성. callback 메서드는 부모의 공유 상태값을 변경하기 위해서 사용된다.
+        const callbackState = useCallback( (param)=>{
+            // state 변경
+            // state = { id: 0, name: '', count: 10, }
+            // param = { count: 5, }
+            // newstate = { id: 0, name: '', count: 10, count: 5,}  ==> ...state, ...param ==> { id: 0, name: '', count: 5,}
+            const newState = {...state, ...param};
+            setState( newState );
+        }, [/* 메서드와 연관되는 상태(변수)명들을 기술 */ state]);
 
+        // JSX로 화면 만들기
+        return (
+            <div>
+                <Example state={state} callbackState={callbackState} >
+                </Example>
+            </div>
+        )
+    }
 
-
+    function Example(props) {
+        // 컴포넌트의 상태값 설정
+        const [age, setAge] = useState(42);
+        const [fruit, setFruit] = useState('banana');
+        const [todos, setTodos] = useState([{ text: 'Learn Hooks' }]);
+
+        // 이벤트 핸들러 작성.
+        const handler = (event)=>{
+            // 이벤트 핸들러는 화살표 함수로 만들면 this bind()를 생략해도 된다
+            console.log(event.target);
+            // 부모 콜백 메서드 호출
+            // { id: 0, name: '', count: 10, }
+            const obj = { count: 5, };
+            props.callbackState( obj );
+        };
+
+        // JSX로 화면 만들기
+        return (
+            <div>
+                <p>You clicked {props.state.count} times</p>
+                <button onClick={handler}>
+                Click me
+                </button>
+            </div>
+        )
+    }
+
+    ReactDOM.render(<ExampleContainer></ExampleContainer>, document.getElementById("app"));
+</script>
+
